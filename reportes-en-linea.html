@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HITSS | Reportes en línea</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blood: #B00610;
+    --blood-bright: #FF1E2A;
+    --blood-deep: #6E0009;
+    --black: #090909;
+    --ink: #161616;
+    --gray: #4A4A4A;
+    --line: #E7E7E7;
+    --panel: #FFFFFF;
+    --bg: #F6F6F6;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{
+    scroll-behavior: smooth;
+  }
+
+  body{
+    margin:0;
+    min-height:100vh;
+    background: var(--bg);
+    color: var(--black);
+    font-family: 'IBM Plex Sans', sans-serif;
+    padding: 0 0 90px;
+    position: relative;
+    overflow-x:hidden;
+  }
+
+  .hex-field{
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .hex{
+    position:absolute;
+    background: var(--blood-bright);
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    opacity: 0.09;
+    animation: drift linear infinite;
+  }
+  @keyframes drift{
+    0%{ transform: translateY(0) rotate(0deg); }
+    100%{ transform: translateY(-160px) rotate(40deg); }
+  }
+
+  header{
+    position: relative;
+    z-index: 1;
+    background:
+      radial-gradient(ellipse 620px 420px at 88% -10%, rgba(255,30,42,0.45), transparent 65%),
+      linear-gradient(155deg, var(--black) 55%, var(--blood-deep) 130%);
+    padding: 22px 6vw 52px;
+    overflow: hidden;
+  }
+
+  header::before{
+    content:"";
+    position:absolute;
+    left:-6%;
+    bottom:-60%;
+    width: 70%;
+    height: 220%;
+    background: var(--blood);
+    opacity: 0.9;
+    transform: rotate(-9deg);
+    clip-path: polygon(0 40%, 100% 0, 100% 8%, 0 48%);
+  }
+
+  .logo-row{
+    display:flex;
+    align-items:center;
+    gap: 16px;
+    margin-bottom: 44px;
+    position:relative;
+    z-index:2;
+    flex-wrap: wrap;
+  }
+
+  .logo-chip{
+    background: #fff;
+    border-radius: 8px;
+    padding: 6px 12px;
+    display:flex;
+    align-items:center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+  }
+
+  .logo-chip strong{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:800;
+    font-size:15px;
+    color: var(--black);
+    letter-spacing: -0.02em;
+  }
+
+  .divider-dot{
+    width:7px; height:7px; border-radius:50%;
+    background: var(--blood-bright);
+    animation: pulse 1.8s infinite;
+  }
+
+  @keyframes pulse{
+    0%{ box-shadow: 0 0 0 0 rgba(255,30,42,0.7); }
+    70%{ box-shadow: 0 0 0 10px rgba(255,30,42,0); }
+    100%{ box-shadow: 0 0 0 0 rgba(255,30,42,0); }
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing: 0.16em;
+    text-transform:uppercase;
+    color: #E8E8E8;
+  }
+
+  .reports-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing: 0.14em;
+    text-transform:uppercase;
+    color: #fff;
+    text-decoration:none;
+    background: rgba(255,30,42,0.14);
+    border: 1px solid rgba(255,30,42,0.55);
+    border-radius: 999px;
+    padding: 8px 16px 8px 12px;
+    transition: all .2s ease;
+    cursor:pointer;
+  }
+
+  .reports-btn svg{
+    width:13px; height:13px;
+    transition: transform .2s ease;
+  }
+
+  .reports-btn:hover,
+  .reports-btn:focus-visible{
+    background: var(--blood-bright);
+    border-color: var(--blood-bright);
+    color:#fff;
+    box-shadow: 0 4px 14px rgba(255,30,42,0.45);
+    outline:none;
+  }
+
+  .reports-btn:hover svg{ transform: translate(2px, -2px); }
+
+  .hero{
+    position: relative;
+    z-index:2;
+    max-width: 1100px;
+  }
+
+  .live-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:#fff;
+    background: rgba(255,30,42,0.16);
+    border: 1px solid rgba(255,30,42,0.5);
+    border-radius: 999px;
+    padding: 6px 12px;
+    margin-bottom: 16px;
+  }
+  .live-dot{
+    width:7px; height:7px; border-radius:50%;
+    background: var(--blood-bright);
+    animation: pulse 1.8s infinite;
+    flex-shrink:0;
+  }
+
+  h1{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:800;
+    font-size: clamp(34px, 4.8vw, 56px);
+    line-height:1.04;
+    margin:0 0 16px;
+    letter-spacing: -0.015em;
+    color: #FFFFFF;
+    text-transform: uppercase;
+  }
+
+  h1 span{
+    color: var(--blood-bright);
+    position: relative;
+    display:inline-block;
+    text-shadow: 0 0 26px rgba(255,30,42,0.55);
+  }
+
+  h1 span::after{
+    content:"";
+    position:absolute;
+    left:0; bottom:4px;
+    width:100%;
+    height: 4px;
+    background: var(--blood-bright);
+    transform-origin: left;
+    animation: underline 1s ease-out .3s both;
+  }
+
+  @keyframes underline{
+    from{ transform: scaleX(0); }
+    to{ transform: scaleX(1); }
+  }
+
+  .subtitle{
+    max-width: 560px;
+    color: #C9C9C9;
+    font-size:15px;
+    line-height:1.6;
+    margin:0;
+  }
+
+  main{
+    max-width: 1100px;
+    margin: -28px auto 0;
+    position:relative;
+    z-index:2;
+    padding: 0 6vw;
+  }
+
+  .report-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    position: relative;
+  }
+
+  @media (max-width: 900px){ .report-grid{ grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 620px){ .report-grid{ grid-template-columns: 1fr; } }
+
+  .card{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 24px 22px 20px;
+    text-decoration:none;
+    color: var(--black);
+    transition: all 0.3s ease;
+    min-height: 196px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    opacity: 0;
+    animation: rise .5s ease forwards;
+  }
+
+  .card:nth-child(1){ animation-delay: .05s; }
+  .card:nth-child(2){ animation-delay: .12s; }
+  .card:nth-child(3){ animation-delay: .19s; }
+  .card:nth-child(4){ animation-delay: .26s; }
+
+  @keyframes rise{
+    from{ opacity:0; transform: translateY(14px); }
+    to{ opacity:1; transform: translateY(0); }
+  }
+
+  .card::before{
+    content:"";
+    position:absolute;
+    top:0; left:0;
+    height: 4px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--blood-bright), var(--blood-deep));
+    border-radius: 12px 12px 0 0;
+    transition: width .3s ease;
+  }
+
+  .card:hover, .card:focus-visible{
+    transform: translateY(-4px);
+    border-color: var(--blood-bright);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+    outline:none;
+  }
+
+  .card:hover::before{ width: 100%; }
+
+  .card:focus-visible{
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--blood-bright);
+  }
+
+  .card-top{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    margin-bottom: 22px;
+  }
+
+  .code{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:0.12em;
+    color: var(--blood);
+    background: rgba(176,6,16,0.09);
+    border-radius: 5px;
+    padding: 3px 8px;
+  }
+
+  .bars{
+    display:flex;
+    align-items:flex-end;
+    gap:3px;
+    height:16px;
+  }
+  .bars span{
+    width:3px;
+    background: var(--line);
+    border-radius:1px;
+    transition: background .25s ease, height .25s ease;
+  }
+  .bars span:nth-child(1){ height:5px; }
+  .bars span:nth-child(2){ height:9px; }
+  .bars span:nth-child(3){ height:13px; }
+  .bars span:nth-child(4){ height:16px; }
+
+  .card:hover .bars span{ background: var(--blood-bright); }
+  .card:hover .bars span:nth-child(1){ height:7px; }
+  .card:hover .bars span:nth-child(2){ height:12px; }
+  .card:hover .bars span:nth-child(3){ height:16px; }
+  .card:hover .bars span:nth-child(4){ height:20px; }
+
+  .card h2{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:18px;
+    font-weight:700;
+    margin: 0 0 8px;
+    line-height:1.3;
+  }
+
+  .card p{
+    font-size:13px;
+    line-height:1.55;
+    color: var(--gray);
+    margin:0;
+    flex-grow:1;
+  }
+
+  .enter{
+    margin-top:18px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:13px;
+    font-weight:600;
+    color: var(--black);
+    letter-spacing:0.01em;
+    transition: color .2s ease;
+  }
+
+  .card:hover .enter{ color: var(--blood-bright); }
+
+  .enter svg{ width:13px; height:13px; transition: transform .2s ease; }
+  .card:hover .enter svg{ transform: translateX(4px); }
+
+  footer{
+    max-width:1100px;
+    margin: 56px auto 0;
+    padding: 16px 6vw;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border-top: 1px solid var(--line);
+  }
+
+  footer .footer-left,
+  footer .footer-right{
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: var(--gray);
+    line-height: 1;
+  }
+
+  footer .footer-left{
+    color: var(--ink);
+  }
+
+  footer .footer-right strong{
+    color: var(--blood);
+    font-weight: 600;
+  }
+
+  @media (max-width: 620px){
+    footer{
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="hex-field" id="hexField"></div>
+
+<header>
+  <div class="logo-row">
+    <div class="logo-chip"><strong>HITSS</strong></div>
+    <span class="divider-dot"></span>
+    <span class="eyebrow">Panel de acceso</span>
+    <a class="reports-btn" href="index.html">
+      Centro de programación
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    </a>
+  </div>
+  <div class="hero">
+    <span class="live-badge"><span class="live-dot"></span>Datos diarios en vivo</span>
+    <h1>Reportes <span>en línea</span></h1>
+    <p class="subtitle">Selecciona un reporte para abrir la vista de Power BI correspondiente, con el registro del día en tiempo real.</p>
+  </div>
+</header>
+
+<main id="reportes">
+  <div class="report-grid">
+
+    <a class="card" href="https://app.powerbi.com/view?r=eyJrIjoiYjEzODJiODktMDc0MS00ZjE0LTllMzAtMTY2MDliYWNmZTJkIiwidCI6IjVmZDU0NjBhLWI0MjUtNDlkZS05YmQwLWZjZDI2MjcwZDMwYyIsImMiOjR9" target="_blank" rel="noopener">
+      <div class="card-top">
+        <span class="code">FOTOS</span>
+        <span class="bars"><span></span><span></span><span></span><span></span></span>
+      </div>
+      <h2>Fotos</h2>
+      <p>Registro fotográfico del día.</p>
+      <div class="enter">Abrir vista <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+    </a>
+
+    <a class="card" href="https://app.powerbi.com/view?r=eyJrIjoiMGZhN2JkZTItOGI2OS00ZWMyLTk1OGEtNWExYmEwMTMzY2MyIiwidCI6IjVmZDU0NjBhLWI0MjUtNDlkZS05YmQwLWZjZDI2MjcwZDMwYyIsImMiOjR9" target="_blank" rel="noopener">
+      <div class="card-top">
+        <span class="code">TNPS</span>
+        <span class="bars"><span></span><span></span><span></span><span></span></span>
+      </div>
+      <h2>TNPS</h2>
+      <p>Satisfacción del cliente del día.</p>
+      <div class="enter">Abrir vista <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+    </a>
+
+    <a class="card" href="https://app.powerbi.com/view?r=eyJrIjoiNjlkNGEyMGMtMjQ2OS00MDliLTk4OTQtMjgwM2Y1NjlhNDMwIiwidCI6IjVmZDU0NjBhLWI0MjUtNDlkZS05YmQwLWZjZDI2MjcwZDMwYyIsImMiOjR9" target="_blank" rel="noopener">
+      <div class="card-top">
+        <span class="code">BO</span>
+        <span class="bars"><span></span><span></span><span></span><span></span></span>
+      </div>
+      <h2>BO – Seguimiento</h2>
+      <p>Operación de Back Office del día.</p>
+      <div class="enter">Abrir vista <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+    </a>
+
+    <a class="card" href="https://app.powerbi.com/view?r=eyJrIjoiZGJiNDJmMTQtM2Q0NS00YjcxLTlkMDAtZDkwZTQ0NDlkYmE0IiwidCI6IjVmZDU0NjBhLWI0MjUtNDlkZS05YmQwLWZjZDI2MjcwZDMwYyIsImMiOjR9" target="_blank" rel="noopener">
+      <div class="card-top">
+        <span class="code">SEG</span>
+        <span class="bars"><span></span><span></span><span></span><span></span></span>
+      </div>
+      <h2>Seguimiento</h2>
+      <p>Panel de seguimiento del día.</p>
+      <div class="enter">Abrir vista <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+    </a>
+
+  </div>
+</main>
+<footer>
+  <div class="footer-left">HITSS · Reportes en línea — datos diarios en vivo</div>
+  <div class="footer-right">By: <strong>Jorge Goicochea</strong> — Analista HITSS</div>
+</footer>
+
+<script>
+  const field = document.getElementById('hexField');
+  const count = 24;
+  for(let i=0;i<count;i++){
+    const h = document.createElement('div');
+    h.className = 'hex';
+    const size = 14 + Math.random()*28;
+    h.style.width = size+'px';
+    h.style.height = size+'px';
+    h.style.left = (Math.random()*100)+'vw';
+    h.style.top = (100 + Math.random()*20)+'vh';
+    h.style.animationDuration = (13 + Math.random()*15)+'s';
+    h.style.animationDelay = (Math.random()*10)+'s';
+    field.appendChild(h);
+  }
+</script>
+
+</body>
+</html>
