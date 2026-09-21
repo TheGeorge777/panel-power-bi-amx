@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HITSS | Reportes en línea</title>
+<script>
+  if (sessionStorage.getItem('hitss_auth') !== 'ok') {
+    window.location.replace('login.html');
+  }
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -272,6 +277,8 @@
   .card:nth-child(2){ animation-delay: .12s; }
   .card:nth-child(3){ animation-delay: .19s; }
   .card:nth-child(4){ animation-delay: .26s; }
+  .card:nth-child(5){ animation-delay: .33s; }
+  .card:nth-child(6){ animation-delay: .40s; }
 
   @keyframes rise{
     from{ opacity:0; transform: translateY(14px); }
@@ -483,6 +490,26 @@
       <div class="enter">Abrir vista <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
     </a>
 
+    <a class="card" href="https://app.powerbi.com/view?r=eyJrIjoiOTE0YjBmY2MtNGI4ZC00YTJlLWEwZTctYWNjZDNjM2JlNThhIiwidCI6IjVmZDU0NjBhLWI0MjUtNDlkZS05YmQwLWZjZDI2MjcwZDMwYyIsImMiOjR9" target="_blank" rel="noopener">
+      <div class="card-top">
+        <span class="code">NUEVO</span>
+        <span class="bars"><span></span><span></span><span></span><span></span></span>
+      </div>
+      <h2>Nuevo Reporte</h2>
+      <p>Panel del día.</p>
+      <div class="enter">Abrir vista <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+    </a>
+
+
+    <a class="card" href="https://app.powerbi.com/view?r=eyJrIjoiZThhMzY4MjEtZTU5MS00YzFjLWE4OGMtYmI1NWFiOWJlMzgyIiwidCI6IjVmZDU0NjBhLWI0MjUtNDlkZS05YmQwLWZjZDI2MjcwZDMwYyIsImMiOjR9" target="_blank" rel="noopener">
+      <div class="card-top">
+        <span class="code">BO FIJA</span>
+        <span class="bars"><span></span><span></span><span></span><span></span></span>
+      </div>
+      <h2>Back Office Fija</h2>
+      <p>Operación de Back Office Fija del día.</p>
+      <div class="enter">Abrir vista <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+    </a>
   </div>
 </main>
 <footer>
