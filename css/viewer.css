@@ -1,0 +1,23 @@
+/* Ventana flotante de vista previa */
+.vwin{position:fixed;z-index:50;display:flex;flex-direction:column;background:#fff;border-radius:18px;overflow:hidden;
+  box-shadow:0 30px 80px -20px rgba(11,11,13,.55),0 0 0 1px rgba(11,11,13,.12);min-width:360px;min-height:260px}
+.vwin[hidden]{display:none}
+.vwin.is-max{inset:0 !important;width:auto !important;height:auto !important;border-radius:0}
+.vwin.is-busy .vwin-body iframe{pointer-events:none}   /* evita que el iframe "robe" el arrastre */
+
+.vwin-bar{display:flex;align-items:center;gap:10px;padding:0 14px 0 20px;height:54px;flex:none;background:var(--black);color:#fff;cursor:grab;user-select:none;touch-action:none;border-bottom:3px solid var(--red)}
+.vwin.is-dragging .vwin-bar{cursor:grabbing}
+.vwin-bar h2{flex:1;min-width:0;font-size:16px;font-weight:800;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vbtn{display:inline-flex;align-items:center;height:34px;padding:0 14px;border-radius:9px;background:rgba(255,255,255,.12);color:#fff;font-size:13px;font-weight:700;white-space:nowrap;cursor:pointer;transition:background .15s}
+.vbtn:hover{background:var(--red)}
+
+.vwin-body{position:relative;flex:1;min-height:0;background:#fff}
+.vwin-body iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.loader{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:var(--gray);font-size:14px;font-weight:600;background:#fff;transition:opacity .3s;pointer-events:none;z-index:1}
+.loader.hide{opacity:0}
+.spin{width:34px;height:34px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--red);animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+.vwin-resize{position:absolute;right:0;bottom:0;width:22px;height:22px;cursor:nwse-resize;touch-action:none;z-index:2;
+  background:linear-gradient(135deg,transparent 50%,rgba(11,11,13,.35) 50%,rgba(11,11,13,.35) 58%,transparent 58%,transparent 70%,rgba(11,11,13,.35) 70%,rgba(11,11,13,.35) 78%,transparent 78%)}
+.vwin.is-max .vwin-resize{display:none}

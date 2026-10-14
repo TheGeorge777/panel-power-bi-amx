@@ -1,0 +1,23 @@
+/* ===== Tokens de diseño: aquí se cambian colores y medidas globales ===== */
+:root{
+  /* Marca HITSS */
+  --red:#E52727;
+  --red-deep:#B00610;
+  --red-dark:#6E0009;
+  --black:#0B0B0D;
+
+  /* Texto y líneas */
+  --ink:#14141A;
+  --gray:#5B5F6B;
+  --line:#DAE2EE;
+
+  /* Fondos */
+  --bg:#E4EBF5;            /* fondo pastel azul-grisáceo del contenido */
+  --bg-soft:#EEF2F9;       /* campos de búsqueda, chips */
+  --panel:#FFFFFF;
+
+  /* Medidas */
+  --sidebar-w:272px;
+  --radius:24px;
+  --ease:.25s cubic-bezier(.4,0,.2,1);
+}

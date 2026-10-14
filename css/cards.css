@@ -1,0 +1,19 @@
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:20px}
+
+.card{position:relative;overflow:hidden;border-radius:var(--radius);color:#fff;padding:26px 26px 24px;min-height:300px;display:flex;flex-direction:column;background:var(--g);box-shadow:0 14px 30px -14px var(--shadow);transition:transform .2s ease,box-shadow .2s ease;isolation:isolate}
+.card:hover{transform:translateY(-4px);box-shadow:0 22px 38px -14px var(--shadow)}
+
+/* Temas de color de tarjeta: se asignan con "theme" en js/data/*.js */
+.card.c-red  {--g:linear-gradient(135deg,#E8202F 0%,#C0101E 55%,#9E0A16 100%);--shadow:rgba(176,6,16,.55)}
+.card.c-black{--g:linear-gradient(135deg,#2A2A31 0%,#16161B 55%,#0B0B0D 100%);--shadow:rgba(11,11,13,.5)}
+.card.c-wine {--g:linear-gradient(135deg,#A60C1B 0%,#7C0613 55%,#4F030C 100%);--shadow:rgba(110,0,9,.55)}
+
+.chip{align-self:flex-start;font-size:12px;font-weight:700;padding:6px 13px;border-radius:999px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3)}
+.card h3{margin-top:22px;font-size:25px;line-height:1.12;font-weight:800;letter-spacing:-.025em;max-width:88%}
+.card p{margin-top:10px;font-size:14.5px;line-height:1.45;color:rgba(255,255,255,.82);max-width:92%}
+.actions{margin-top:auto;padding-top:22px;display:flex;gap:10px;flex-wrap:wrap}
+.btn.primary{background:#fff;color:var(--ink)}
+.btn.primary:hover{background:#f1f1f4}
+.btn.ghost{border:1px solid rgba(255,255,255,.45);color:#fff;background:rgba(255,255,255,.06)}
+.btn.ghost:hover{background:rgba(255,255,255,.18)}
+.deco{position:absolute;right:-6px;bottom:-4px;width:78%;height:62%;z-index:-1;opacity:.14;pointer-events:none}

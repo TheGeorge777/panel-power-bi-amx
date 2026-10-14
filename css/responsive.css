@@ -1,0 +1,21 @@
+@media (max-width:900px){
+  body{overflow:auto}
+  .app{grid-template-columns:minmax(0,1fr) !important;grid-template-rows:auto minmax(0,1fr);height:auto;min-height:100dvh}
+  .app.is-collapsed .sidebar{display:none}
+  .sidebar{border-right:0;border-bottom:1px solid var(--line);overflow:visible}
+  .sidebar-inner{width:auto;padding:16px 16px 14px;overflow:visible}
+  .search{margin-top:14px}
+  .cat-title,.side-foot{display:none}
+  .cats{flex-direction:row;overflow-x:auto;margin-top:12px;gap:8px}
+  .cat{width:auto;white-space:nowrap;padding:10px 12px}
+  .cat.all{padding-left:12px}
+  .main{overflow:visible}
+  .topbar{padding:12px 18px;position:static}
+  .home{padding:10px 18px 40px}
+  .grid{grid-template-columns:1fr}
+  /* En celular la vista previa ocupa toda la pantalla */
+  .vwin{inset:0 !important;width:auto !important;height:auto !important;border-radius:0;min-width:0}
+  .vwin-resize{display:none}
+  .vwin-bar{cursor:default}
+  #vmax{display:none}
+}

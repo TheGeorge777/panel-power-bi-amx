@@ -1,0 +1,28 @@
+.sidebar{background:var(--panel);border-right:1px solid var(--line);overflow:hidden;min-width:0;transition:visibility 0s}
+.app.is-collapsed .sidebar{visibility:hidden;border-right-color:transparent;transition:visibility 0s var(--ease)}
+.sidebar-inner{width:var(--sidebar-w);height:100%;display:flex;flex-direction:column;padding:28px 20px 20px;overflow-y:auto}
+
+.brand{display:flex;align-items:center;gap:12px;padding:0 4px}
+.brand img{width:42px;height:auto;display:block}
+.brand b{display:block;font-size:18px;font-weight:800;letter-spacing:.01em;line-height:1.1}
+.brand small{font-size:12.5px;color:var(--gray);font-weight:500}
+
+.search{margin-top:28px;position:relative;display:block}
+.search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--gray)}
+.search input{width:100%;height:44px;border:1px solid var(--line);background:var(--bg-soft);border-radius:12px;padding:0 14px 0 38px;font:inherit;font-size:14px;color:var(--ink);outline:none;transition:border-color .15s,box-shadow .15s,background .15s}
+.search input::placeholder{color:var(--gray)}
+.search input:focus{border-color:var(--red);background:#fff;box-shadow:0 0 0 3px rgba(229,39,39,.14)}
+
+.cat-title{margin:26px 6px 10px;font-size:12.5px;font-weight:600;color:var(--gray)}
+.cats{display:flex;flex-direction:column;gap:6px}
+.cat{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:12px 14px;border-radius:12px;font-size:14.5px;font-weight:600;transition:background .15s,color .15s}
+.cat:hover{background:var(--bg-soft)}
+.cat .dot{width:9px;height:9px;border-radius:3px;background:var(--c);flex:none}
+.cat .n{margin-left:auto;font-size:12px;font-weight:700;color:var(--gray);background:var(--bg-soft);min-width:26px;text-align:center;padding:3px 8px;border-radius:999px}
+.cat.active{background:var(--black);color:#fff}
+.cat.active .n{background:rgba(255,255,255,.18);color:#fff}
+.cat.active .dot{background:var(--red)}
+.cat.all{padding-left:35px}
+
+.side-foot{margin-top:auto;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--gray);line-height:1.5}
+.side-foot b{display:block;color:var(--ink);font-weight:700;font-size:13.5px;margin-top:2px}
