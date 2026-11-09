@@ -40,6 +40,11 @@ HITSS.categories.push({
       title: "BO Buzón, WhatsApp y LD",
       desc:  "BI acumulado de Back Office para Buzón, Whatsapp y LD.",
       url:   "https://app.powerbi.com/view?r=eyJrIjoiYzdmOWY4OTktZWQxZC00YzllLTg2OTQtYzA5MGQyODI5ZWFiIiwidCI6IjVmZDU0NjBhLWI0MjUtNDlkZS05YmQwLWZjZDI2MjcwZDMwYyIsImMiOjR9"
+    },
+    {
+      title: "Dotación y Reporte de Ausentismo",
+      desc:  "Dotación y seguimiento de ausentismo, actualizado al D-1.",
+      url:   "https://app.powerbi.com/view?r=eyJrIjoiODNkOTg4MDgtZWFlZS00NmM0LTk4YTYtMDQ0MzcxNmJkNDZkIiwidCI6IjVmZDU0NjBhLWI0MjUtNDlkZS05YmQwLWZjZDI2MjcwZDMwYyIsImMiOjR9"
     }
   ]
 });

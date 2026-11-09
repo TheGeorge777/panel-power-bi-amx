@@ -8,7 +8,7 @@ window.HITSS = {
     heroTitle:   'Todos tus reportes en <em>un solo lugar</em>',
     heroLead:    "Elige un reporte para verlo aquí mismo o ábrelo en una pestaña nueva. Información actualizada al D-1.",
     footNote:    "Panel interno de reportes Power BI",
-    footAuthor:  "Generado por Vargas J. & Goicochea Samuel",
+    footAuthor:  "Generado por Jorge Goicochea & Johnny Vargas",
     pageTitle:   "HITSS | Panel de reportes"
   }
 };
